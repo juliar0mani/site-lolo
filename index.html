@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nossos Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa-fundo-1: #fdf1ec;
+    --rosa-fundo-2: #f7dfe0;
+    --vinho: #7a2e3d;
+    --vinho-escuro: #4a1c26;
+    --dourado: #c9a15a;
+    --marfim: #fffaf5;
+    --texto: #4a3a3a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Nunito Sans', sans-serif;
+    color: var(--texto);
+    background: radial-gradient(ellipse at top, var(--rosa-fundo-2), var(--rosa-fundo-1) 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 20px 16px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* corações ambientes, discretos */
+  .coracao-flutuante{
+    position:fixed;
+    bottom:-40px;
+    font-size: 18px;
+    color: var(--vinho);
+    opacity:0.25;
+    animation: subir linear infinite;
+    pointer-events:none;
+  }
+  @keyframes subir{
+    to{ transform: translateY(-110vh) rotate(20deg); opacity:0; }
+  }
+
+  .cartao{
+    position:relative;
+    z-index:1;
+    max-width: 480px;
+    width:100%;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--vinho);
+    margin: 0 0 4px;
+  }
+
+  h1{
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--vinho-escuro);
+    margin: 0 0 16px;
+    line-height:1.25;
+  }
+
+  /* Polaroid */
+  .polaroid{
+    background: var(--marfim);
+    padding: 12px 12px 14px;
+    border-radius: 3px;
+    box-shadow: 0 18px 40px -12px rgba(74,28,38,0.35), 0 2px 6px rgba(0,0,0,0.08);
+    display:inline-flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotate(-3deg);
+    margin-bottom: 18px;
+    position:relative;
+  }
+
+  .polaroid img{
+    display:block;
+    width: min(220px, 55vw);
+    height: min(250px, 34vh);
+    object-fit: cover;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #f2c9d1, #d9a8b3);
+    margin-bottom: 10px;
+  }
+
+  .polaroid-legenda{
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--vinho);
+    margin: 0;
+  }
+
+  .selo{
+    position:absolute;
+    top:-14px;
+    right:-10px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background: var(--dourado);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transform: rotate(8deg);
+  }
+
+  /* Contador */
+  .contador-titulo{
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--vinho);
+    margin-bottom: 10px;
+  }
+
+  .contador{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    flex-wrap: wrap;
+  }
+
+  .unidade{
+    background: var(--marfim);
+    border: 1px solid rgba(122,46,61,0.15);
+    border-radius: 12px;
+    padding: 14px 6px;
+    width: 76px;
+    box-shadow: 0 8px 18px -10px rgba(74,28,38,0.3);
+  }
+
+  .numero{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size: 1.9rem;
+    color: var(--vinho-escuro);
+    transition: transform 0.25s ease;
+  }
+
+  .numero.pulso{
+    transform: scale(1.12);
+  }
+
+  .rotulo{
+    font-size: 0.68rem;
+    text-transform uppercase: none;
+    letter-spacing: 0.06em;
+    color: var(--vinho);
+    opacity:0.75;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  .desde{
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--texto);
+    opacity:0.75;
+  }
+
+  .assinatura{
+    margin-top: 16px;
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--vinho-escuro);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .coracao-flutuante{ animation: none; display:none; }
+    .numero{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cartao">
+  <p class="eyebrow">desde aquele dia,</p>
+  <h1>cada segundo com você<br>vale a pena contar</h1>
+
+  <div class="polaroid">
+    <span class="selo">💛</span>
+    <!-- Troque "foto.png" pelo nome do arquivo da sua foto, na mesma pasta do index.html -->
+    <img src="foto.jpeg" alt="Nossa foto" onerror="this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center';">
+    <p class="polaroid-legenda">nós, sempre</p>
+  </div>
+
+  <div class="contador">
+    <div class="unidade"><div class="numero" id="dias">0</div><div class="rotulo">dias</div></div>
+    <div class="unidade"><div class="numero" id="horas">0</div><div class="rotulo">horas</div></div>
+    <div class="unidade"><div class="numero" id="minutos">0</div><div class="rotulo">min</div></div>
+    <div class="unidade"><div class="numero" id="segundos">0</div><div class="rotulo">seg</div></div>
+  </div>
+
+  <p class="desde">contando desde 13 de setembro de 2025</p>
+
+  <p class="assinatura">com todo o meu amor 💕</p>
+</div>
+
+<script>
+  // ===== DATA DE INÍCIO =====
+  // Ano, Mês (0 = janeiro), Dia, Hora, Minuto, Segundo
+  const dataInicio = new Date(2025, 8, 13, 0, 0, 0);
+
+  const elDias = document.getElementById('dias');
+  const elHoras = document.getElementById('horas');
+  const elMinutos = document.getElementById('minutos');
+  const elSegundos = document.getElementById('segundos');
+
+  let ultimoSegundo = null;
+
+  function atualizarContador(){
+    const agora = new Date();
+    let diferenca = agora - dataInicio;
+    if (diferenca < 0) diferenca = 0;
+
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+    const segundos = Math.floor((diferenca / 1000) % 60);
+
+    elDias.textContent = dias;
+    elHoras.textContent = String(horas).padStart(2, '0');
+    elMinutos.textContent = String(minutos).padStart(2, '0');
+    elSegundos.textContent = String(segundos).padStart(2, '0');
+
+    if (segundos !== ultimoSegundo){
+      elSegundos.classList.add('pulso');
+      setTimeout(() => elSegundos.classList.remove('pulso'), 250);
+      ultimoSegundo = segundos;
+    }
+  }
+
+  atualizarContador();
+  setInterval(atualizarContador, 1000);
+
+  // Corações flutuantes discretos ao fundo
+  function criarCoracao(){
+    const coracao = document.createElement('div');
+    coracao.className = 'coracao-flutuante';
+    coracao.textContent = '♥';
+    coracao.style.left = Math.random() * 100 + 'vw';
+    coracao.style.animationDuration = (8 + Math.random() * 6) + 's';
+    coracao.style.fontSize = (12 + Math.random() * 14) + 'px';
+    document.body.appendChild(coracao);
+    setTimeout(() => coracao.remove(), 15000);
+  }
+  setInterval(criarCoracao, 2500);
+</script>
+
+</body>
+</html>
